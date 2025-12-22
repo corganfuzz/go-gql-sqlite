@@ -2,13 +2,6 @@
 
 Clean integration of **Go**, **GraphQL**, and **SQLite**. An example of how to build a robust, type-safe GraphQL API server without the overhead of heavy frameworks.
 
-## Features
-
-- **GraphQL Server**: Custom HTTP handler implementing the GraphQL specification.
-- **SQLite Database**: Lightweight, serverless, and self-contained SQL database engine.
-- **GORM ORM**: Developer-friendly ORM for Golang.
-- **GraphiQL Interface**: In-browser IDE for exploring GraphQL.
-
 ## Architecture
 
 ```mermaid
@@ -18,7 +11,13 @@ graph TD
     Schema -->|Resolvers| Models[PKG Models]
     Models -->|GORM| DB[(SQLite DB)]
 ```
+## Features
 
+- **GraphQL Server**: Custom HTTP handler implementing the GraphQL specification.
+- **SQLite Database**: Lightweight, serverless, and self-contained SQL database engine.
+- **GORM ORM**: Developer-friendly ORM for Golang.
+- **GraphiQL Interface**: In-browser IDE for exploring GraphQL.
+- 
 The project follows a modular structure:
 
 - **`main.go`**: Entry point. Sets up the HTTP server, initializes the database connection, and defines the root GraphQL schema.
