@@ -5,7 +5,6 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-// Author comment
 type Author struct {
 	gorm.Model
 	Name      string
@@ -39,8 +38,8 @@ func SetupAuthorMutations() graphql.Fields {
 			},
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 				author := Author{Name: params.Args["name"].(string)}
-				db, _ := gorm.Open("sqlite3", "authors.db")
-				db.Save(&author)
+				// Use shared DB
+				DB.Create(&author)
 				return author, nil
 			},
 		},

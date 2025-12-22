@@ -5,7 +5,6 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-// Comment here
 type Comment struct {
 	gorm.Model
 	Body string
