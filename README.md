@@ -1,6 +1,6 @@
 # Go / GraphQL HTTP Server
 
-Clean integration of **Go** (Golang), **GraphQL**, and **SQLite**. An example of how to build a robust, type-safe GraphQL API server without the overhead of heavy frameworks.
+Clean integration of **Go**, **GraphQL**, and **SQLite**. An example of how to build a robust, type-safe GraphQL API server without the overhead of heavy frameworks.
 
 ## Features
 
