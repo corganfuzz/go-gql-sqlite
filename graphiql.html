@@ -1,52 +1,58 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <style>
-      body {
-        height: 100%;
-        margin: 0;
-        width: 100%;
-        overflow: hidden;
-      }
-      #graphiql {
-        height: 100vh;
-      }
-    </style>
-    <script
-      crossorigin
-      src="https://unpkg.com/react@16/umd/react.development.js"
-    ></script>
-    <script
-      crossorigin
-      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
-    ></script>
-    <link rel="stylesheet" href="https://unpkg.com/graphiql/graphiql.min.css" />
-  </head>
-  <body>
-    <div id="graphiql">Loading...</div>
-    <script
-      src="https://unpkg.com/graphiql/graphiql.min.js"
-      type="application/javascript"
-    ></script>
-    <script>
-      function graphQLFetcher(graphQLParams) {
-        return fetch('/graphql', {
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(graphQLParams),
-        }).then(function (response) {
-          return response.json();
-        });
-      }
-      ReactDOM.render(
-        React.createElement(GraphiQL, {
-          fetcher: graphQLFetcher,
-          defaultVariableEditorOpen: true,
-        }),
-        document.getElementById('graphiql'),
-      );
-    </script>
-  </body>
+
+<head>
+  <title>Portfolio API - GraphiQL</title>
+  <style>
+    body {
+      height: 100%;
+      margin: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    #graphiql {
+      height: 100vh;
+    }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/graphiql@2.4.7/graphiql.min.css" />
+</head>
+
+<body>
+  <div id="graphiql">Loading...</div>
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/graphiql@2.4.7/graphiql.min.js"></script>
+  <script>
+    const fetcher = GraphiQL.createFetcher({
+      url: '/graphql',
+    });
+    ReactDOM.render(
+      React.createElement(GraphiQL, {
+        fetcher: fetcher,
+        defaultQuery: `# Portfolio API
+{
+  projects {
+    id
+    title
+    techStack
+  }
+  skills {
+    id
+    name
+    category
+    level
+  }
+  experiences {
+    id
+    company
+    role
+  }
+}`,
+      }),
+      document.getElementById('graphiql'),
+    );
+  </script>
+</body>
+
 </html>

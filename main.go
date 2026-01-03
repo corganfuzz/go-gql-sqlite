@@ -10,32 +10,38 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-var aggregateSchema = graphql.Fields{
-	"tutorial": model.SingleTutorialSchema(),
-	"list":     model.ListTutorialSchema(),
-}
+var rootQuery = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Query",
+	Fields: graphql.Fields{
+		"projects":    model.GetProjects(),
+		"skills":      model.GetSkills(),
+		"experiences": model.GetExperiences(),
+	},
+})
 
-var aggregateMutations = graphql.NewObject(graphql.ObjectConfig{
+var rootMutation = graphql.NewObject(graphql.ObjectConfig{
 	Name: "Mutation",
 	Fields: graphql.Fields{
-		"create": model.CreateTutorialMutation(),
+		"createProject":    model.CreateProject(),
+		"createSkill":      model.CreateSkill(),
+		"createExperience": model.CreateExperience(),
 	},
 })
 
 func main() {
-
 	// Initialize DB
-
 	model.SetupDB()
-	defer model.DB.Close()
+	sqlDB, err := model.DB.DB()
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer sqlDB.Close()
 
 	// Setup Schema
-
-	rootQuery := graphql.ObjectConfig{Name: "RootQuery", Fields: aggregateSchema}
 	schema, err := graphql.NewSchema(
 		graphql.SchemaConfig{
-			Query:    graphql.NewObject(rootQuery),
-			Mutation: aggregateMutations,
+			Query:    rootQuery,
+			Mutation: rootMutation,
 		},
 	)
 
@@ -71,6 +77,6 @@ func main() {
 		http.ServeFile(w, r, "graphiql.html")
 	})
 
-	fmt.Println("Server is running at http://localhost:8080")
+	fmt.Println("Portfolio API Server is running at http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
