@@ -31,6 +31,7 @@ var rootMutation = graphql.NewObject(graphql.ObjectConfig{
 func main() {
 	// Initialize DB
 	model.SetupDB()
+	model.SeedDatabase()
 	sqlDB, err := model.DB.DB()
 	if err != nil {
 		log.Fatal(err)
