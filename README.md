@@ -54,6 +54,21 @@ go run main.go
 
 The server will start at `http://localhost:8080`.
 
+### Running with Docker
+
+Build and run with Docker Compose:
+
+```bash
+docker-compose up --build
+```
+
+Or build manually:
+
+```bash
+docker build -t go-gql-server .
+docker run -p 8080:8080 go-gql-server
+```
+
 ## Usage
 
 ### Using GraphiQL
