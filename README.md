@@ -2,6 +2,8 @@
 
 A world-class implementation of **Go**, **GraphQL**, and **SQLite**. This API serves as a personal portfolio backend, demonstrating clean architecture, type safety, and modern infrastructure.
 
+<img width="1913" height="1427" alt="Screenshot from 2026-01-03 11-11-27" src="https://github.com/user-attachments/assets/45cc00de-d678-44ac-a6d7-c064dcd88e47" />
+
 ## Architecture
 
 ```mermaid
